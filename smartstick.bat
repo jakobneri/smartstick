@@ -56,32 +56,36 @@ if not exist "%STICK_DIR%playlists.txt" (
 
 :: Set ffmpeg location for yt-dlp
 set "FFMPEG_DIR=%STICK_DIR%tools"
+set "OUTPUT_TPL=%MUSIC_DIR%\%%(playlist_title)s\%%(title)s.%%(ext)s"
 
 set "count=0"
 for /f "usebackq eol=# tokens=*" %%u in ("%STICK_DIR%playlists.txt") do (
     set "url=%%u"
-    :: Skip empty lines
     if not "!url!"=="" (
         set /a count+=1
-        echo.
-        echo --- Playlist !count!: %%u ---
-        echo.
-        "%STICK_DIR%tools\yt-dlp.exe" --extract-audio --audio-format mp3 --audio-quality 0 --download-archive "%STICK_DIR%archive.txt" --output "%MUSIC_DIR%\%%(playlist_title)s\%%(title)s.%%(ext)s" --no-overwrites --ignore-errors --ffmpeg-location "%FFMPEG_DIR%" "%%u"
+        call :download_one "%%u" !count!
     )
 )
 
-if %count%==0 (
+if !count!==0 (
     echo No playlist URLs found in playlists.txt.
     echo Edit playlists.txt and add your YouTube playlist URLs.
 ) else (
     echo.
     echo =============================
-    echo   Done! Processed !count! playlist(s).
+    echo   Done! Processed !count! playlist^(s^).
     echo =============================
 )
 echo.
 pause
 goto :menu
+
+:download_one
+echo.
+echo --- Playlist %2: %~1 ---
+echo.
+"%STICK_DIR%tools\yt-dlp.exe" --extract-audio --audio-format mp3 --audio-quality 0 --download-archive "%STICK_DIR%archive.txt" --output "%OUTPUT_TPL%" --no-overwrites --ignore-errors --ffmpeg-location "%FFMPEG_DIR%" "%~1"
+goto :eof
 
 :: ============================================================
 :: UPDATE SMART STICK
