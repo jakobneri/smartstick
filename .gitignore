@@ -1,4 +1,6 @@
-music/tools/
+main/music/tools/
+music/
 archive.txt
 config.txt
-.claude/
+.claude/*
+!.claude/CLAUDE.md

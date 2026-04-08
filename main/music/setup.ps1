@@ -1,7 +1,6 @@
-$StickDir = Split-Path $PSScriptRoot -Parent
+$RootDir = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 $ToolsDir = Join-Path $PSScriptRoot "tools"
-$ConfigFile = Join-Path $StickDir "config.txt"
-$ConfigExample = Join-Path $StickDir "config.example.txt"
+$ConfigFile = Join-Path $RootDir "config.txt"
 
 Write-Host "=============================" -ForegroundColor Cyan
 Write-Host "  Smart Stick - Setup"        -ForegroundColor Cyan
@@ -51,9 +50,9 @@ try {
     return
 }
 
-# Create config.txt from example if it doesn't exist
+# Create config.txt if it doesn't exist
 if (-not (Test-Path $ConfigFile)) {
-    Copy-Item $ConfigExample $ConfigFile
+    "# Smart Stick - Configuration`n# Add one YouTube playlist URL per line.`n# Lines starting with # are ignored." | Out-File -FilePath $ConfigFile -Encoding UTF8
     Write-Host ""
     Write-Host "Created config.txt - edit it to add your playlist URLs." -ForegroundColor Yellow
 }
