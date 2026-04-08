@@ -3,6 +3,8 @@ setlocal enabledelayedexpansion
 
 :: Get the directory where this script lives
 set "STICK_DIR=%~dp0"
+:: Music folder is at the root of the USB drive
+set "MUSIC_DIR=%~d0\Music"
 
 :menu
 cls
@@ -64,7 +66,7 @@ for /f "usebackq eol=# tokens=*" %%u in ("%STICK_DIR%playlists.txt") do (
         echo.
         echo --- Playlist !count!: %%u ---
         echo.
-        "%STICK_DIR%tools\yt-dlp.exe" --extract-audio --audio-format mp3 --audio-quality 0 --download-archive "%STICK_DIR%archive.txt" --output "%STICK_DIR%downloads\%%(playlist_title)s\%%(title)s.%%(ext)s" --no-overwrites --ignore-errors --ffmpeg-location "%FFMPEG_DIR%" "%%u"
+        "%STICK_DIR%tools\yt-dlp.exe" --extract-audio --audio-format mp3 --audio-quality 0 --download-archive "%STICK_DIR%archive.txt" --output "%MUSIC_DIR%\%%(playlist_title)s\%%(title)s.%%(ext)s" --no-overwrites --ignore-errors --ffmpeg-location "%FFMPEG_DIR%" "%%u"
     )
 )
 

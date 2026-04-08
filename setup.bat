@@ -11,7 +11,6 @@ set "STICK_DIR=%~dp0"
 
 :: Create directories
 if not exist "%STICK_DIR%tools" mkdir "%STICK_DIR%tools"
-if not exist "%STICK_DIR%downloads" mkdir "%STICK_DIR%downloads"
 
 :: Download yt-dlp.exe
 echo [1/2] Downloading yt-dlp.exe...
