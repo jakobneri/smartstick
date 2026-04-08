@@ -1,9 +1,8 @@
-$StickDir = $PSScriptRoot
-$MusicDir = Join-Path ($StickDir | Split-Path -Qualifier) "Music"
-$ConfigFile = Join-Path $StickDir "config.txt"
-$ConfigExample = Join-Path $StickDir "config.example.txt"
-$ArchiveFile = Join-Path $StickDir "archive.txt"
-$MusicModule = Join-Path $StickDir "music"
+$RootDir = Split-Path $PSScriptRoot -Parent
+$MusicDir = Join-Path ($RootDir | Split-Path -Qualifier) "Music"
+$ConfigFile = Join-Path $RootDir "config.txt"
+$ArchiveFile = Join-Path $RootDir "archive.txt"
+$MusicModule = Join-Path $RootDir "music"
 $ToolsDir = Join-Path $MusicModule "tools"
 $YtDlp = Join-Path $ToolsDir "yt-dlp.exe"
 $FFmpeg = Join-Path $ToolsDir "ffmpeg.exe"
