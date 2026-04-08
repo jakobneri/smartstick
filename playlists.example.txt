@@ -1,6 +1,0 @@
-# Smart Stick - Playlist Configuration
-# Add one YouTube playlist URL per line.
-# Lines starting with # are comments and will be ignored.
-#
-# Example:
-# https://www.youtube.com/playlist?list=PLxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

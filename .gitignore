@@ -1,3 +1,8 @@
-tools/
+music/tools/
 archive.txt
+config.txt
+
+# Legacy (safe to delete)
+tools/
+downloads/
 playlists.txt
