@@ -25,7 +25,7 @@ if exist "%STICK_DIR%tools\yt-dlp.exe" (
 :: Download ffmpeg
 echo [2/2] Downloading ffmpeg...
 echo        This may take a moment (ffmpeg is ~80MB)...
-powershell -Command "& { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $tmp = '%STICK_DIR%tools\ffmpeg.zip'; Invoke-WebRequest -Uri 'https://github.com/yt-dlp/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip' -OutFile $tmp; Expand-Archive -Path $tmp -DestinationPath '%STICK_DIR%tools\ffmpeg_temp' -Force; $exe = Get-ChildItem -Path '%STICK_DIR%tools\ffmpeg_temp' -Recurse -Filter 'ffmpeg.exe' | Select-Object -First 1; Copy-Item $exe.FullName '%STICK_DIR%tools\ffmpeg.exe'; Remove-Item '%STICK_DIR%tools\ffmpeg_temp' -Recurse -Force; Remove-Item $tmp -Force }"
+powershell -ExecutionPolicy Bypass -File "%STICK_DIR%download_ffmpeg.ps1" -ToolsDir "%STICK_DIR%tools"
 if exist "%STICK_DIR%tools\ffmpeg.exe" (
     echo        ffmpeg.exe downloaded successfully.
 ) else (
